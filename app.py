@@ -28,6 +28,14 @@ st.set_page_config(
     page_title="ESG Risk Tracker | OSINT",
     page_icon="🌍",
     layout="wide",
+    hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
     initial_sidebar_state="expanded",
 )
 
@@ -207,14 +215,11 @@ with st.sidebar:
     )
 
 st.markdown("---")
-st.markdown("### 🔒 Private Beta Access")
-email = st.text_input("Join the private beta waitlist (Enter Email)", placeholder="you@domain.com")
-if st.button("Join Waitlist"):
-    if "@" in email:
-        requests.post("https://docs.google.com/forms/d/e/1FAIpQLSctMIuuMZod_Ngxy0vWK2G3TVMbUzwN8faBE6MvwJwUGPLwgA/viewform?usp=publish-editor", json={"email": email}, headers={"Content-Type": "application/json"})
-        st.success("Thanks! You're on the waitlist.")
-    else:
-        st.warning("Please enter a valid email.")
+st.markdown("### 📬 Contact & Updates")
+st.markdown("For more information, custom data requests, or to join our private beta updates, reach out directly:")
+st.markdown("- 📧 **Primary Email:** rutturat@gmail.com")
+st.markdown("- 📧 **Alternative Email:** rbratul33@gmail.com")
+st.markdown("- 💼 **LinkedIn:** [Connect with Rakibul Islam](https://www.linkedin.com/in/rakibulislam07/)")
 
 # ----------------------------------------------------------------------------
 # MAIN CONTENT
