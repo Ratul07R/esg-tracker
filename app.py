@@ -206,17 +206,17 @@ with st.sidebar:
         value=int((df["Risk_Level"] == "CRITICAL").sum()),
     )
 
-       st.markdown("---")
-    st.markdown("### 🔒 Private Beta")
-    with st.form("email_form"):
-        email = st.text_input("Join the private beta waitlist (Enter Email)", placeholder="you@domain.com")
-        submitted = st.form_submit_button("Join Waitlist")
-        if submitted:
-            if "@" in email:
-                requests.post("https://script.google.com/macros/s/AKfycbzZWMQfEpvDFHgOxrs2n3c2c_6fSZMY0AsKfvpUgAzz/dev", json={"email": email})
-                st.success("Thanks! You're on the waitlist.")
-            else:
-                st.warning("Please enter a valid email.")
+              st.markdown("---")
+        st.markdown("### 🔒 Private Beta")
+        with st.form("email_form"):
+            email = st.text_input("Join the private beta waitlist (Enter Email)", placeholder="you@domain.com")
+            submitted = st.form_submit_button("Join Waitlist")
+            if submitted:
+                if "@" in email:
+                    requests.post("https://script.google.com/macros/s/AKfycbzZWMQfEpvDFHgOxrs2n3c2c_6fSZMY0AsKfvpUgAzz/dev", json={"email": email})
+                    st.success("Thanks! You're on the waitlist.")
+                else:
+                    st.warning("Please enter a valid email.")
 
 # ----------------------------------------------------------------------------
 # MAIN CONTENT
