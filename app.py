@@ -19,7 +19,6 @@ import folium
 from folium.plugins import Fullscreen, MousePosition
 from streamlit_folium import st_folium
 import pandas as pd
-import requests
 
 # ----------------------------------------------------------------------------
 # PAGE CONFIGURATION
@@ -28,7 +27,6 @@ st.set_page_config(
     page_title="ESG Risk Tracker | OSINT",
     page_icon="🌍",
     layout="wide",
-st.markdown(hide_st_style, unsafe_allow_html=True)
     initial_sidebar_state="expanded",
 )
 
@@ -239,11 +237,6 @@ m = folium.Map(
     location=SOUTH_ASIA_CENTER,
     zoom_start=4,
     tiles="OpenStreetMap",
-    attr=(
-        '&copy; <a href="https://www.openstreetmap.org/copyright">'
-        "OpenStreetMap</a> contributors &copy; "
-        '<a href="https://carto.com/attributions">CARTO</a>'
-    ),
     control_scale=True,
 )
 
@@ -252,7 +245,7 @@ Fullscreen(position="topleft").add_to(m)
 MousePosition(separator=" | ", prefix="Lat/Lon::").add_to(m)
 
 # All markers are red per spec. CRITICAL sites are rendered slightly larger
-# so they remain visually distinct on the dark basemap.
+# so they remain visually distinct on the basemap.
 RED = "#ff2b2b"
 RADIUS = {"CRITICAL": 11, "HIGH": 8}
 
@@ -303,19 +296,20 @@ for _, row in view_df.iterrows():
         tooltip=f"{row['Location_Name']} — {row['Risk_Level']}",
     ).add_to(m)
 
-# Legend (lower-left, themed to match dark basemap)
+# Legend (lower-left, themed to match basemap)
 legend_html = """
 <div style="
     position: fixed;
     bottom: 30px; left: 30px;
     z-index: 9999;
-    background: rgba(20,20,20,0.85);
-    color: #fff;
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
     padding: 10px 14px;
     border-radius: 6px;
     font-family: Arial, sans-serif;
     font-size: 12px;
-    border: 1px solid #444;">
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
   <div style="font-weight:700; margin-bottom:6px;">ESG Risk Markers</div>
   <div><span style="display:inline-block;width:14px;height:14px;border-radius:50%;
                   background:#ff2b2b;margin-right:6px;vertical-align:middle;"></span>
