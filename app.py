@@ -19,6 +19,7 @@ import folium
 from folium.plugins import Fullscreen, MousePosition
 from streamlit_folium import st_folium
 import pandas as pd
+import requests
 
 # ----------------------------------------------------------------------------
 # PAGE CONFIGURATION
@@ -205,18 +206,17 @@ with st.sidebar:
         value=int((df["Risk_Level"] == "CRITICAL").sum()),
     )
 
-    st.markdown("---")
+       st.markdown("---")
     st.markdown("### 🔒 Private Beta")
-    email = st.text_input(
-        "Join the private beta waitlist (Enter Email)",
-        placeholder="you@domain.com",
-    )
-    if email:
-        local, _, domain = email.partition("@")
-        if local and "." in domain:
-            st.success("Thanks! You're on the waitlist.")
-        else:
-            st.warning("Please enter a valid email address.")
+    with st.form("email_form"):
+        email = st.text_input("Join the private beta waitlist (Enter Email)", placeholder="you@domain.com")
+        submitted = st.form_submit_button("Join Waitlist")
+        if submitted:
+            if "@" in email:
+                requests.post("https://script.google.com/macros/s/AKfycbzZWMQfEpvDFHgOxrs2n3c2c_6fSZMY0AsKfvpUgAzz/dev", json={"email": email})
+                st.success("Thanks! You're on the waitlist.")
+            else:
+                st.warning("Please enter a valid email.")
 
 # ----------------------------------------------------------------------------
 # MAIN CONTENT
@@ -242,7 +242,7 @@ SOUTH_ASIA_CENTER = [20.5937, 78.9629]
 m = folium.Map(
     location=SOUTH_ASIA_CENTER,
     zoom_start=4,
-    tiles="CartoDB dark_matter",
+    tiles="OpenStreetMap",
     attr=(
         '&copy; <a href="https://www.openstreetmap.org/copyright">'
         "OpenStreetMap</a> contributors &copy; "
