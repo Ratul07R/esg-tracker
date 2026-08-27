@@ -335,3 +335,11 @@ with st.expander("View underlying dataset"):
         use_container_width=True,
         hide_index=True,
     )
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
