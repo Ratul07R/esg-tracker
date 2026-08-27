@@ -211,7 +211,7 @@ st.markdown("### 🔒 Private Beta Access")
 email = st.text_input("Join the private beta waitlist (Enter Email)", placeholder="you@domain.com")
 if st.button("Join Waitlist"):
     if "@" in email:
-        requests.post("https://script.google.com/macros/s/AKfycbzZWMQfEpvDFHgOxrs2n3c2c_6fSZMY0AsKfvpUgAzz/dev", json={"email": email}, headers={"Content-Type": "application/json"})
+        requests.post("https://docs.google.com/forms/d/e/1FAIpQLSctMIuuMZod_Ngxy0vWK2G3TVMbUzwN8faBE6MvwJwUGPLwgA/viewform?usp=publish-editor", json={"email": email}, headers={"Content-Type": "application/json"})
         st.success("Thanks! You're on the waitlist.")
     else:
         st.warning("Please enter a valid email.")
